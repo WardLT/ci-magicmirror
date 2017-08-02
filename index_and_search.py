@@ -69,11 +69,14 @@ def search_image(image, collection_name='ci-faces', bucket_name='ci-magicmirror'
 def get_name(response):
     names = {'beng': 'Ben Glick', 'alexf': 'Alex Foster', 'rohank': 'Rohan Kumar', 'logany': 'Logan Young', 'monical': 'Monica Lewis', 'helenaa':'Helena Abney-McPeek'}
 
-    image_id = response['FaceMatches'][0]['Face']['ExternalImageId']
-    pattern = re.compile('([a-zA-Z]+)\d+')
-    result = re.search(pattern=pattern, string=image_id)
-    face_id = result.groups()[0] if result else None
-    return names.get(face_id, 'Average human')
+    matches = response['FaceMatches']
+    face_id = None
+    if matches:
+        image_id = matches[0]['Face']['ExternalImageId']
+        pattern = re.compile('([a-zA-Z]+)\d+')
+        result = re.search(pattern=pattern, string=image_id)
+        face_id = result.groups()[0].lower() if result else None
+    return names.get(face_id, 'Average Human')
 
 
 if __name__ == '__main__':
