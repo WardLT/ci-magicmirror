@@ -1,0 +1,9 @@
+__pycache__
+imageToSave.txt
+rekognition_backend.py
+static
+templates
+web
+webcam.js
+webcam.min.js
+webcam.swf
