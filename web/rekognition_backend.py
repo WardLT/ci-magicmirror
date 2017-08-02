@@ -18,5 +18,6 @@ def write_file():
     with open("imageToSave.jpg", 'rb') as img:
         img_data = bytearray(img.read())
     response = ins.search_image(img_data, collection_name='ci-faces', bucket_name = 'ci-magicmirror', method='byte')
-    #print(response)
+    #print(response.keys())
+    print(ins.get_names(response['FaceMatches'][0]['Face']['ExternalImageId']))
     return json.dumps("{}")
