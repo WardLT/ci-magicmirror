@@ -1,5 +1,6 @@
 import boto3
 import pickle
+import re
 
 client = boto3.client('rekognition')
 
@@ -65,6 +66,16 @@ def search_image(image, collection_name='ci-faces', bucket_name='ci-magicmirror'
         print(e)
 
 
+def get_name(response):
+    names = {'beng': 'Ben Glick', 'alexf': 'Alex Foster', 'rohank': 'Rohan Kumar', 'logany': 'Logan Young', 'monical': 'Monica Lewis', 'helenaa':'Helena Abney-McPeek'}
+
+    image_id = response['FaceMatches'][0]['Face']['ExternalImageId']
+    pattern = re.compile('([a-zA-Z]+)\d+')
+    result = re.search(pattern=pattern, string=image_id)
+    face_id = result.groups()[0] if result else None
+    return names.get(face_id, 'Average human')
+
+
 if __name__ == '__main__':
     bucket_name = 'ci-magicmirror'
     collection_name = 'ci-faces'
@@ -82,10 +93,4 @@ if __name__ == '__main__':
     # Searching with S3 object
     key = 'beng/ben0.jpg'
     response = search_image(key, method='S3')
-    print(response)
-
-def get_names():
-    image_id = response.get('FaceMatches')[0].get('Face').get('ExternalImageId')
-    names = {'beng': 'Ben Glick', 'alexf': 'Alex Foster', 'rohank': 'Rohan Kumar', 'logany': 'Logan Young', 'monical': 'Monica Lewis', 'helenaa':'Helena Abney-McPeek'}
-    image_id = image_id[:-1]
-    return names.get(image_id)
+    print(get_name(response))
