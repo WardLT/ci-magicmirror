@@ -3,6 +3,7 @@ import pickle
 
 def index_images(folder_name, collection_name, bucket_name):
     s3 = boto3.resource('s3')
+    client = boto3.client('rekognition')
     bucket = s3.Bucket(bucket_name)
     objects = [x for x in bucket.objects.all() if x.key.startswith(folder_name)]
     for i, object in enumerate(objects):
@@ -25,6 +26,7 @@ def index_images(folder_name, collection_name, bucket_name):
 
 
 def index_collection(names, collection_name, bucket, create=False):
+    client = boto3.client('rekognition')
     if create:
         try:
             response = client.create_collection(CollectionId=collection_name)
