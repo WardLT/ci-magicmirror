@@ -83,3 +83,9 @@ if __name__ == '__main__':
     key = 'beng/ben0.jpg'
     response = search_image(key, method='S3')
     print(response)
+
+def get_names():
+    image_id = response.get('FaceMatches')[0].get('Face').get('ExternalImageId')
+    names = {'beng': 'Ben Glick', 'alexf': 'Alex Foster', 'rohank': 'Rohan Kumar', 'logany': 'Logan Young', 'monical': 'Monica Lewis', 'helenaa':'Helena Abney-McPeek'}
+    image_id = image_id[:-1]
+    return names.get(image_id)
