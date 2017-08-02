@@ -2,6 +2,7 @@ import boto3
 import pickle
 
 def index_images(folder_name, collection_name, bucket_name):
+    s3 = boto3.resource('s3')
     bucket = s3.Bucket(bucket_name)
     objects = [x for x in bucket.objects.all() if x.key.startswith(folder_name)]
     for i, object in enumerate(objects):
@@ -34,6 +35,7 @@ def index_collection(names, collection_name, bucket, create=False):
 
 
 def search_image(image, collection_name, bucket_name, max_faces=3, method='S3'):
+    client = boto3.client('rekognition')
     try:
         if method == 'S3':
             response = client.search_faces_by_image(
@@ -65,6 +67,7 @@ def search_image(image, collection_name, bucket_name, max_faces=3, method='S3'):
 if __name__ == '__main__':
     s3 = boto3.resource('s3')
     bucket_name = 'ci-magicmirror'
+    collection_name = 'ci-faces'
     client = boto3.client('rekognition')
 
     names = ['rohank', 'logany', 'monical', 'helenaa', 'beng', 'alexf']
@@ -75,8 +78,8 @@ if __name__ == '__main__':
 
     # Searching with byte image
     # uglybytes = pickle.load(open('byteimage'))
-    # response = search_image(uglybytes, collection_name='ci-faces', bucket_name=bucket_name, method='byte')
+    # response = search_image(uglybytes, collection_name=collection_name, bucket_name=bucket_name, method='byte')
 
     # Searching with S3 object
     # key = 'beng/ben0.jpg'
-    # response = search_image(key, collection_name='ci-faces', bucket_name=bucket_name, method='S3')
+    # response = search_image(key, collection_name=collection_name, bucket_name=bucket_name, method='S3')
