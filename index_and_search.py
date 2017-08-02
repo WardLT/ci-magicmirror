@@ -65,10 +65,8 @@ def search_image(image, collection_name, bucket_name, max_faces=3, method='S3'):
 
 
 if __name__ == '__main__':
-    s3 = boto3.resource('s3')
     bucket_name = 'ci-magicmirror'
     collection_name = 'ci-faces'
-    client = boto3.client('rekognition')
 
     names = ['rohank', 'logany', 'monical', 'helenaa', 'beng', 'alexf']
 
