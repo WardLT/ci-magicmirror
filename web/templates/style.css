@@ -11,14 +11,21 @@ form {
 form > input{
     margin-right: 15px;
     border: none;
-    border-radius: 20px;
+    border-radius: 15px;
     height: 80px;
     width: 50%;
     background-color: rgba(44, 177, 70, 1);
-    box-shadow: 5px 5px 5px gray;
+    box-shadow:
+    	5px 5px 5px gray,
+    	inset 3px 3px rgba(255, 255, 255, .3);
     color: white;
     font-size: 18px;
-    background-image: linear-gradient(rgba(255, 255, 255, .45), rgba(255, 255, 255, 0));
+    background-image: linear-gradient(rgba(255, 255, 255, .4), rgba(255, 255, 255, 0));
+}
+
+form > input:hover{
+     box-shadow: inset 3px 3px 2px rgba(0, 0, 0, .3);
+     background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, .2));
 }
 
 #name {
