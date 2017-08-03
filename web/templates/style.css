@@ -1,20 +1,35 @@
 body {
-	text-align: center;
-	font-family: Helvetica, sans-serif;
-	
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+    color: #333333;
 }
 
 form {
-	margin-top: 15px;
+    margin-top: 25px;
 }
 
-form > input {
-     margin-right: 15px;
+form > input{
+    margin-right: 15px;
+    border: none;
+    border-radius: 20px;
+    height: 80px;
+    width: 50%;
+    background-color: rgba(35, 142, 56, 1);
+    box-shadow: 5px 5px 5px gray;
+    color: white;
+    font-size: 18px;
+    background-image: linear-gradient(rgba(255, 255, 255, .45), rgba(255, 255, 255, 0));
 }
 
-#results{
-	margin: 20px;
-	padding: 20px;
-	border: 1px solid;
-	background: #ccc;
+#name {
+    margin: 20px;
+    height: 70px;
+}
+
+#results {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid;
+    background: #ccc;
+    border-radius: 15px;
 }
